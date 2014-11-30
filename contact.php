@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Contact us - Contacts Page | Design Company - Free Website Template from Templatemonster.com</title>
+  <title>Contact us | C Kelly decorators</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
@@ -31,74 +31,64 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="testimonials.html">Testimonials</a></li>
-          <li><a href="contact.html"  class="current">Contact</a></li>
+          <li><a href="contact.php"  class="current">Contact</a></li>
           <li><a href="gallery.html">Gallery</a></li>
         </ul>
       </nav>
     </div>
 	</header>
-  <!-- #gallery -->
- <!--<section id="gallery">
-  	<div class="container">
-    	<ul id="myRoundabout">
-      	<li><img src="images/slide3.jpg" alt=""></li>
-        <li><img src="images/slide2.jpg" alt=""></li>
-        <li><img src="images/slide5.jpg" alt=""></li>
-        <li><img src="images/slide1.jpg" alt=""></li>
-        <li><img src="images/slide4.jpg" alt=""></li>
-      </ul> 
-  	</div>
-  </section>-->
-  <!-- /#gallery -->
   <div class="main-box">
     <div class="container">
       <div class="inside">
         <div class="wrapper">
-        	<!-- aside -->
-          <aside>
-            <h2>Our <span>Contacts</span></h2>
-            <!-- .contacts
-            <ul class="contacts">
-            	<li><strong>Zip Code:</strong>50122</li>
-              <li><strong>Country:</strong>USA</li>
-              <li><strong>City:</strong>New York</li>
-              <li><strong>Telephone 1:</strong>+354 5635600</li>
-              <li><strong>Fax:</strong>+354 5635620</li>
-              <li><strong>Email:</strong><a href="#">businessco@mail.com</a></li>
-            </ul>
-        -->
-          </aside>
+
           <!-- content -->
           <section id="content">
             <article>
             	<h2>Contact <span>Form</span></h2>
               <form id="contacts-form" action="" method="post">
-                <fieldset>
-                  <div class="field">
-                    <label>Your Name:</label>
-                    <input type="text" value=""/>
-                  </div>
-                  <div class="field">
-                    <label>Your E-mail:</label>
-                    <input type="email" value=""/>
-                  </div>
-                  <div class="field">
-                    <label>Your Website:</label>
-                    <input type="url" value=""/>
-                  </div>
-                  <div class="field">
-                    <label>Your Message:</label>
-                    <textarea></textarea>
-                  </div>
-                  <div><a href="#" onclick="document.getElementById('contacts-form').submit()">Send Your Message!</a></div>
-                </fieldset>
+                  <?php
+                        $action=$_REQUEST['action'];
+                        if ($action=="")    /* display the contact form */
+                            {
+                            ?>
+                            <form  action="" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="submit">
+                            <label>Name:</label><br>
+                            <input name="name" type="text" value="" size="30"/><br>
+                            <label>Telephone number</label><br>
+                            <input name="email" type="text" value="" size="30"/><br>
+                            <label>Your message:</label><br>
+                            <textarea name="message" rows="7" cols="30"></textarea><br>
+                            <input type="submit" value="Send"/>
+                            </form>
+                            <?php
+                            }
+                        else                /* send the submitted data */
+                            {
+                            $name=$_REQUEST['name'];
+                            $email=$_REQUEST['email'];
+                            $message=$_REQUEST['message'];
+                            if (($name=="")||($email=="")||($message==""))
+                                {
+                                echo "All fields are required, please fill <a href=\"\">the form</a> again.";
+                                }
+                            else{
+                                $from="From: $name<$email>\r\nReturn-path: $email";
+                                $subject="Message sent using your contact form";
+                                mail("camkellyuk@yahoo.co.uk", $subject, $message, $from);
+                                echo "Thanks for contacting me, I will respond to you shortly. Best regards Cam.";
+                                }
+                            }
+                        ?>
               </form>
-            </article> 
+            </article>
           </section>
         </div>
       </div>
     </div>
   </div>
+
   <!-- footer -->
   <footer>
     <div class="container">
